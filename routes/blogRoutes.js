@@ -8,6 +8,7 @@ const {
   blog_index,
 } = require("../controllers/blogController");
 
+// router is like mini app making our code more modular
 const router = express.Router();
 
 router.post("/", blog_create_post);

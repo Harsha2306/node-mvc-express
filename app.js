@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+//mongoose is used to create objectToDbSchemaMapping
 const mongoose = require("mongoose");
 
 const blogRoutes = require("./routes/blogRoutes");
@@ -9,6 +10,7 @@ const app = express();
 
 const dbURI = `mongodb+srv://${username}:${password}@node-net-ninja.6zjhyv0.mongodb.net/${dbName}`;
 
+//connecting to DB
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -21,8 +23,11 @@ mongoose
 
 app.set("view engine", "ejs");
 
+//logger module
 app.use(morgan("dev"));
+//middleware to look for public files
 app.use(express.static("public"));
+//middleware to parse request body
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
